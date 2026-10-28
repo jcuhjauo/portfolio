@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
+import { BIRDS } from './birds';
 
-// 想加新頁面,在這裡加一筆就會出現在選單裡。
 const LINKS = [
   { href: '/', label: '首頁' },
-  { href: '/#work', label: '專案' },
+  { href: '/projects', label: '專案' },
   { href: '/gallery', label: '攝影展間' },
 ];
 
@@ -16,8 +17,13 @@ export default function Navbar() {
   return (
     <header className="nav">
       <nav className="nav-inner" aria-label="主選單">
-        <Link href="/" className="nav-logo">
-          趙誼臻
+        <Link href="/" className="nav-flock" aria-label="回首頁">
+          {BIRDS.map((Bird, i) => (
+            <span key={i} className="nav-bird">
+              <Bird size={32} />
+            </span>
+          ))}
+       
         </Link>
         <div className="nav-links">
           {LINKS.map((l) => {
@@ -28,6 +34,7 @@ export default function Navbar() {
               </Link>
             );
           })}
+          <ThemeToggle />
         </div>
       </nav>
     </header>

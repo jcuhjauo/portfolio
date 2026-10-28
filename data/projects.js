@@ -3,6 +3,7 @@
 
 export const PROJECTS = [
   {
+    period: '2026.10 – 開發中',
     id: 'parrotcare',
     title: 'ParrotCare',
     sub: '寵物照護・健康紀錄',
@@ -17,6 +18,7 @@ export const PROJECTS = [
     ],
   },
   {
+    period: '2026.09 – 2026.12',
     id: 'campus-login',
     title: '校園登入系統',
     sub: '多因子驗證與安全防護機制・2025/6 ~ 2026/1',

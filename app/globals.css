@@ -102,12 +102,12 @@ a {
   justify-content: space-between;
   gap: 8px 20px;
 }
-.nav-logo {
+/*.nav-logo {
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
-}
+}*/
 .nav-links {
   display: flex;
   flex-wrap: wrap;
@@ -130,11 +130,13 @@ a {
   border-color: var(--honey-deep);
   color: var(--ink);
 }
+/*
 .nav-link:focus-visible,
 .nav-logo:focus-visible {
   outline: 2px solid var(--honey-deep);
   outline-offset: 2px;
-}
+}'
+*/
 
 /* ---------- 首頁 Hero ---------- */
 
@@ -404,4 +406,188 @@ h2.project-title {
   html {
     scroll-behavior: auto;
   }
+}
+/* ---------- 淺/深色變數 ---------- */
+:root {
+  --nav-bg: rgba(251, 246, 236, 0.88);
+  --pill-bg: rgba(255, 255, 255, 0.5);
+  --pill-bg-hover: rgba(255, 255, 255, 0.85);
+  --card-a: rgba(255, 255, 255, 0.55);
+  --card-b: rgba(255, 255, 255, 0.25);
+}
+:root[data-theme='dark'] {
+  --paper: #1b1a1f;
+  --paper-deep: #2a2830;
+  --ink: #f1ebe0;
+  --ink-soft: #bdb4a5;
+  --ink-faint: #81796c;
+  --slate: #9fb0c2;
+  --slate-deep: #b8c6d6;
+  --honey-deep: #e8b56a;
+  --line: #3a3842;
+  --panel: #25242b;
+  --mat: #1f1e24;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --nav-bg: rgba(27, 26, 31, 0.88);
+  --pill-bg: rgba(255, 255, 255, 0.05);
+  --pill-bg-hover: rgba(255, 255, 255, 0.11);
+  --card-a: rgba(255, 255, 255, 0.06);
+  --card-b: rgba(255, 255, 255, 0.02);
+}
+body,
+.nav,
+/*.pill {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}*/
+  .pill {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+.nav { background: var(--nav-bg); }
+.pill { background: var(--pill-bg); }
+.pill:hover { background: var(--pill-bg-hover); }
+.project-card { background: linear-gradient(180deg, var(--card-a), var(--card-b)); }
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.theme-toggle:hover { border-color: var(--honey-deep); color: var(--ink); }
+.theme-toggle:focus-visible { outline: 2px solid var(--honey-deep); outline-offset: 2px; }
+
+/* ---------- 眼睛跟著滑鼠 ---------- */
+.eye {
+  transform: translate(var(--ex, 0px), var(--ey, 0px));
+  transition: transform 0.15s ease-out;
+}
+
+/* ---------- 打字機游標 ---------- */
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 3px;
+  vertical-align: -0.1em;
+  background: var(--honey-deep);
+  opacity: 0;
+}
+.caret.typing { opacity: 1; animation: blink 0.8s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- 換頁飛行的鸚鵡 ---------- */
+.flyby {
+  position: fixed;
+  top: 28vh;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  animation: flyacross 1.2s ease-in-out both;
+}
+@keyframes flyacross {
+  0%   { transform: translate(-80px, 40px) rotate(8deg); opacity: 0; }
+  15%  { opacity: 1; }
+  50%  { transform: translate(50vw, -40px) rotate(-6deg); }
+  85%  { opacity: 1; }
+  100% { transform: translate(calc(100vw + 80px), 30px) rotate(6deg); opacity: 0; }
+}
+
+/* ---------- 專案卡片 hover ---------- */
+.project-card { transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease, border-color 0.3s ease; }
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px -14px var(--shadow);
+}
+.project-preview img { transition: transform 0.5s ease; }
+.project-card:hover .project-preview img { transform: scale(1.04); }
+
+/* ---------- 404 ---------- */
+.notfound { padding-top: 110px; }
+.notfound .tagline { margin-top: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flyby, .caret.typing { animation: none; }
+  .flyby { display: none; }
+  .project-card:hover, .project-card:hover .project-preview img { transform: none; }
+}
+
+
+/* ---------- 時間軸 ---------- */
+.timeline {
+  position: relative;
+  margin-top: 8px;
+  padding-left: 26px;
+  border-left: 1px solid var(--line);
+}
+.timeline-item { position: relative; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 38px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--honey-deep);
+}
+.timeline-date {
+  display: block;
+  margin-top: 26px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--slate-deep);
+}
+.timeline-date + .project-card { margin-top: 8px; }
+
+@media (max-width: 560px) {
+  .timeline { padding-left: 16px; }
+  .timeline-item::before { left: -22px; }
+}
+
+
+.wing {
+  transform-box: fill-box;
+  transform-origin: 85% 90%;
+}
+.flyby .wing {
+  animation: flap 0.22s ease-in-out infinite alternate;
+}
+@keyframes flap {
+  from { transform: rotate(16deg); }
+  to   { transform: rotate(-26deg); }
+}
+/* ---------- 導覽列:六隻小鳥站在線上 ---------- */
+.nav-flock {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  line-height: 0;
+  align-self: flex-end;
+  margin-bottom: -12px; /* 讓腳剛好踩在導覽列下緣的線上 */
+}
+.nav-bird {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+/*.nav-bird.flip svg { transform: scaleX(-1); }*/ /* 翻轉的鳥, 目前沒有用到 */
+.nav-bird:hover { transform: translateY(-5px); }
+.nav-bird:hover .wing { animation: flap 0.22s ease-in-out infinite alternate; }
+.nav-flock:focus-visible { outline: 2px solid var(--honey-deep); outline-offset: 4px; border-radius: 6px; }
+
+@media (max-width: 480px) {
+  /* 手機寬度不夠,只留中間的四隻 */
+  .nav-bird:nth-child(1),
+  .nav-bird:nth-child(6) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-bird:hover { transform: none; }
 }

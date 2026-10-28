@@ -84,6 +84,14 @@ export default function InfiniteGallery() {
   const [openIdx, setOpenIdx] = useState(null);
   const [canEdit, setCanEdit] = useState(false);
 
+  const [hintOpen, setHintOpen] = useState(true);
+
+  // 進來先顯示 6 秒,開始操作(點擊或按鍵)就收起
+  useEffect(() => {
+    const t = setTimeout(() => setHintOpen(false), 6000);
+    return () => clearTimeout(t);
+  }, []);
+
   // 網址加上 ?edit 才會出現編輯功能(給你自己用,訪客看不到)
   useEffect(() => {
     setCanEdit(new URLSearchParams(window.location.search).has('edit'));
@@ -113,11 +121,13 @@ export default function InfiniteGallery() {
             onReady: () => setPhase('ready'),
           });
           engineRef.current = engine;
-        } catch {
+               } catch (err) {
+          console.error('展間建立失敗:', err);
           setPhase('fail');
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('three 載入失敗:', err);
         if (!cancelled) setPhase('fail');
       });
 
@@ -177,29 +187,34 @@ export default function InfiniteGallery() {
       <header className={styles.top}>
         <div>
           <span className={styles.eyebrow}>Photo Gallery · 無盡空間</span>
-          <h1 className={styles.title}>趙誼臻的無盡展間</h1>
+          <h1 className={styles.title}>無盡展間</h1>
         </div>
-        <p className={styles.hint}>
-          <span>
-            <kbd>W</kbd>
-            <kbd>S</kbd> 前後 <kbd>A</kbd>
-            <kbd>D</kbd> 左右平移
-          </span>
-          <span>
-            <kbd>←</kbd>
-            <kbd>→</kbd> 轉向,或拖曳畫面轉頭
-          </span>
-          <span>
-            <kbd>Shift</kbd> 加速
-          </span>
-          <span>
-            <kbd>Enter</kbd> 觀看
-          </span>
-        </p>
+        <button
+          type="button"
+          className={styles.hintBtn}
+          aria-label="操作說明"
+          aria-expanded={hintOpen}
+          onClick={() => setHintOpen((v) => !v)}
+        >
+          ?
+        </button>
       </header>
 
-      <section ref={stageRef} className={styles.stage} tabIndex={0} aria-label="無盡的立體展間,用鍵盤或拖曳在其中走動">
+     <section
+        ref={stageRef}
+        className={styles.stage}
+        tabIndex={0}
+        aria-label="無盡的立體展間,用鍵盤或拖曳在其中走動"
+        onPointerDown={() => setHintOpen(false)}
+        onKeyDown={() => setHintOpen(false)}
+      >
         <canvas ref={glRef} className={styles.gl} />
+        <div className={`${styles.hintPanel} ${hintOpen ? styles.hintOn : ''}`} aria-hidden={!hintOpen}>
+          <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移動</span>
+          <span><kbd>←</kbd><kbd>→</kbd> 或拖曳轉向</span>
+          <span><kbd>Shift</kbd> 加速</span>
+          <span><kbd>Enter</kbd> 觀看</span>
+        </div>
         <div className={styles.mini}>
           <span>周邊地圖</span>
           <canvas ref={miniRef} width={300} height={300} aria-label="周邊雷達圖,點一下走到該處" />
@@ -244,7 +259,9 @@ export default function InfiniteGallery() {
       </div>
 
       <p className={styles.foot}>
-        空間會隨著你走動一直長出新的光幕,作品會循環出現在不同位置,每塊光幕的兩面都有說明牌。點作品會走近,再點一次可以看大圖。
+        空間會隨著你走動一直長出新的光幕,作品會循環出現在不同位置,每塊光幕的兩面都有說明牌。
+        <br/>
+        點作品會走近,再點一次可以看大圖。
       </p>
 
       {openIdx !== null && (

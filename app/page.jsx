@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import ParrotPair from '../components/ParrotPair';
-import ProjectCard from '../components/ProjectCard';
+import Typewriter from '../components/Typewriter';
+import Footer from '../components/Footer';
 import { CubeIcon, GithubIcon, MailIcon } from '../components/Icons';
-import { PROJECTS } from '../data/projects';
 
 const EMAIL = 'juju11241103@gmail.com';
 const GITHUB = 'https://github.com/jcuhjauo';
@@ -19,7 +19,9 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="tagline">把想法一一實現。</p>
+        <p className="tagline" aria-label="把想法一一實現。">
+          <Typewriter text="把想法一一實現。" />
+        </p>
 
         <p className="bio">
           目前正往軟體工程師的路上前進,喜歡把腦中的點子做成能跑起來的系統
@@ -31,6 +33,7 @@ export default function Home() {
           作品集裡的 ParrotCare,就是因為牠們而誕生的&lt;3
         </p>
 
+
         <div className="links-row">
           <a className="pill" href={`mailto:${EMAIL}`}>
             <MailIcon />
@@ -40,47 +43,23 @@ export default function Home() {
             <GithubIcon />
             jcuhjauo
           </a>
+          <Link className="pill" href="/projects">
+            專案作品
+          </Link>
           <Link className="pill" href="/gallery">
             <CubeIcon />
             攝影展間
           </Link>
+          {/* 把履歷放到 public/resume.pdf(檔名全小寫) */}
+          <a className="pill" href="/resume.pdf" download="趙誼臻-履歷.pdf">
+            ↓ 下載履歷
+          </a>
         </div>
       </section>
 
       <div className="divider" />
 
-      <section className="project" id="work">
-        <span className="eyebrow">專案作品</span>
-        {PROJECTS.map((p) => (
-          <ProjectCard key={p.id} project={p} />
-        ))}
-      </section>
-
-      <div className="divider" />
-
-      <footer className="site-footer">
-        <p className="footer-line">
-          有想聊的專案、工作機會,
-          <br />
-          或只是想聊聊鸚鵡,都歡迎寫信給我。
-        </p>
-
-        <div className="links-row">
-          <a className="pill" href={`mailto:${EMAIL}`}>
-            <MailIcon />
-            Email
-          </a>
-          <a className="pill" href={GITHUB} target="_blank" rel="noopener noreferrer">
-            <GithubIcon />
-            GitHub
-          </a>
-        </div>
-
-        <div className="footer-bottom">
-          <span>© 2026 趙誼臻</span>
-          <span>設計靈感來自家裡的牡丹鸚鵡</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
