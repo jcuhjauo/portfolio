@@ -305,8 +305,12 @@ h2.project-title {
   color: var(--ink-soft);
   font-size: 15px;
   line-height: 1.95;
-  margin: 0 0 22px;
-  max-width: 60ch;
+  margin: 0 0 0.7em;
+  max-width: 42em;
+  text-wrap: pretty;
+}
+.project-desc:last-of-type {
+  margin-bottom: 22px;
 }
 .tags {
   display: flex;

@@ -17,7 +17,9 @@ export default function ProjectCard({ project }) {
       <div className="project-body">
         <h2 className="project-title">{project.title}</h2>
         <p className="project-sub">{project.sub}</p>
-        <p className="project-desc">{project.desc}</p>
+        {(Array.isArray(project.desc) ? project.desc : [project.desc]).map((para, i) => (
+          <p key={i} className="project-desc">{para}</p>
+        ))}
 
         <div className="tags">
           {project.tags.map((t) => (
