@@ -14,7 +14,7 @@
 export const PHOTOS = [
   {
     id: 'p1',
-    src: '/images/photos/TAIYU.jpg',
+    src: '/images/photos/TAIYU.JPG',
     scene: 'parrots',
     orient: 'landscape',
     title: '抬頭',
