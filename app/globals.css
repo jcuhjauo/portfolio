@@ -575,7 +575,7 @@ body,
   gap: 2px;
   line-height: 0;
   align-self: flex-end;
-  margin-bottom: -12px; /* 讓腳剛好踩在導覽列下緣的線上 */
+  margin-bottom: 4px; /* 讓腳剛好踩在導覽列下緣的線上 */
 }
 .nav-bird {
   display: inline-block;
