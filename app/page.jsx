@@ -50,10 +50,10 @@ export default function Home() {
             <CubeIcon />
             攝影展間
           </Link>
-          {/* 把履歷放到 public/resume.pdf(檔名全小寫) */}
+          {/* 把履歷放到 public/resume.pdf(檔名全小寫)
           <a className="pill" href="/resume.pdf" download="趙誼臻-履歷.pdf">
             ↓ 下載履歷
-          </a>
+          </a> */}
         </div>
       </section>
 
