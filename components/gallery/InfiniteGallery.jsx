@@ -228,7 +228,7 @@ export default function InfiniteGallery() {
         <p className={styles.status} aria-live="polite">
           {nearPhoto ? (
             <>
-              <b>{nearPhoto.title}</b>　按 Enter 或「觀看這幅」放大
+              <b>{nearPhoto.title}</b>　<span className={styles.kbdOnly}>按 Enter 或</span>「觀看這幅」放大
             </>
           ) : (
             '光幕會一直延伸下去,往前走,或點地板與地圖就能移動。'

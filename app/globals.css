@@ -587,9 +587,9 @@ body,
 .nav-flock:focus-visible { outline: 2px solid var(--honey-deep); outline-offset: 4px; border-radius: 6px; }
 
 @media (max-width: 480px) {
-  /* 手機寬度不夠,只留中間的四隻 */
-  .nav-bird:nth-child(1),
-  .nav-bird:nth-child(6) { display: none; }
+  /* 手機:六隻都留著,改成縮小一點,擠得進一行 */
+  .nav-flock { gap: 0; }
+  .nav-bird svg { width: 27px; height: 21.6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

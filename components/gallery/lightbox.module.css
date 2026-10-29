@@ -208,10 +208,18 @@
     gap: 18px;
   }
   .photo {
-    padding: 12px;
+    padding: 8px;
+  }
+  .frame {
+    padding: 8px;
+    max-height: none;
+  }
+  /* 照片框的高度不超過螢幕的 38%,留空間給下面的說明 */
+  .land {
+    width: min(100%, calc(38vh * 4 / 3));
   }
   .port {
-    width: min(100%, 300px);
+    width: min(70%, calc(38vh * 3 / 4));
   }
 }
 @media (prefers-reduced-motion: reduce) {

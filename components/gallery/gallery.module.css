@@ -269,6 +269,15 @@
   z-index: 3;
 }
 .hintOn { opacity: 1; transform: translate(-50%, 0); }
+
+/* 手機沒有鍵盤:隱藏 WASD 說明、「?」按鈕與「按 Enter」字樣 */
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  .hintBtn,
+  .hintPanel,
+  .kbdOnly {
+    display: none;
+  }
+}
 .hintPanel kbd {
   display: inline-block;
   min-width: 22px;
